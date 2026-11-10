@@ -31,10 +31,10 @@ function LoginPage({ onAuthenticated }: LoginPageProps) {
 
   return (
     <main className="login-shell">
-      <section className="brand-panel" aria-label="Evindo inventory platform">
-        <a className="wordmark" href="/" aria-label="Evindo">
-          <span className="wordmark-symbol" aria-hidden="true">E</span>
-          <span>EVINDO</span>
+      <section className="brand-panel" aria-label="InvenTrack inventory platform">
+        <a className="wordmark" href="/" aria-label="InvenTrack">
+          <span className="wordmark-symbol" aria-hidden="true">IT</span>
+          <span>InvenTrack</span>
         </a>
 
         <div className="brand-copy">
@@ -69,13 +69,13 @@ function LoginPage({ onAuthenticated }: LoginPageProps) {
 
       <section className="login-panel" aria-labelledby="login-title">
         <div className="login-content">
-          <div className="mobile-wordmark wordmark" aria-label="Evindo">
-            <span className="wordmark-symbol" aria-hidden="true">E</span>
-            <span>EVINDO</span>
+          <div className="mobile-wordmark wordmark" aria-label="InvenTrack">
+            <span className="wordmark-symbol" aria-hidden="true">IT</span>
+            <span>InvenTrack</span>
           </div>
           <p className="eyebrow login-eyebrow">SELAMAT DATANG KEMBALI</p>
           <h2 id="login-title">Masuk ke akun Anda</h2>
-          <p className="login-intro">Gunakan akun Evindo untuk melanjutkan.</p>
+          <p className="login-intro">Gunakan akun InvenTrack untuk melanjutkan.</p>
 
           <form className="login-form" onSubmit={handleSubmit}>
             <label htmlFor="email">Email</label>
@@ -122,7 +122,7 @@ function LoginPage({ onAuthenticated }: LoginPageProps) {
 
           <p className="login-note">Akses hanya untuk pengguna yang terdaftar.</p>
         </div>
-        <p className="login-footer">EVINDO · INTERNAL SYSTEM</p>
+        <p className="login-footer">INVENTRACK · INTERNAL SYSTEM</p>
       </section>
     </main>
   )

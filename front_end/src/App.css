@@ -32,14 +32,14 @@
 
 .wordmark-symbol {
   display: grid;
-  width: 34px;
+  width: 38px;
   aspect-ratio: 1;
   place-items: center;
   border: 1px solid rgb(244 243 233 / 45%);
   border-radius: 10px 10px 10px 3px;
   color: #f3a47e;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 22px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -313,7 +313,7 @@
   .brand-copy,
   .inventory-visual,
   .panel-footer { display: none; }
-  .brand-panel .wordmark-symbol { width: 30px; }
+  .brand-panel .wordmark-symbol { width: 34px; }
   .login-panel { min-height: calc(100vh - 66px); flex: 1; justify-content: flex-start; padding: 40px 24px 20px; }
   .mobile-wordmark { display: inline-flex; margin-bottom: 36px; color: #163a32; }
   .login-content h2 { font-size: 32px; }

@@ -23,14 +23,14 @@ function App() {
 
   return (
     <main className="session-page">
-      <a className="wordmark" href="/" aria-label="Evindo">
-        <span className="wordmark-symbol" aria-hidden="true">E</span>
-        <span>EVINDO</span>
+      <a className="wordmark" href="/" aria-label="InvenTrack">
+        <span className="wordmark-symbol" aria-hidden="true">IT</span>
+        <span>InvenTrack</span>
       </a>
       <section className="session-content" aria-labelledby="session-title">
         <p className="eyebrow">AKSES TERVERIFIKASI</p>
         <h1 id="session-title">Selamat datang, {session.user.name}</h1>
-        <p className="session-copy">Anda berhasil masuk ke sistem Evindo.</p>
+        <p className="session-copy">Anda berhasil masuk ke sistem InvenTrack.</p>
         <dl className="session-details">
           <div>
             <dt>Email</dt>
