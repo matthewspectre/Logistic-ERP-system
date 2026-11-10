@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { login } from './login-service'
+import { createUser } from '../register/register-service'
 import type { AuthSession } from '../types'
 
 interface LoginPageProps {
@@ -9,10 +10,13 @@ interface LoginPageProps {
 
 function LoginPage({ onAuthenticated }: LoginPageProps) {
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isRegistering, setIsRegistering] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -20,6 +24,14 @@ function LoginPage({ onAuthenticated }: LoginPageProps) {
     setIsSubmitting(true)
 
     try {
+      if (isRegistering) {
+        await createUser(name.trim(), email.trim(), password)
+        setIsRegistering(false)
+        setPassword('')
+        setSuccessMessage('Registrasi berhasil. Silakan masuk dengan akun Anda.')
+        return
+      }
+
       const session = await login(email.trim(), password)
       onAuthenticated(session)
     } catch (error) {
@@ -73,14 +85,35 @@ function LoginPage({ onAuthenticated }: LoginPageProps) {
             <span className="wordmark-symbol" aria-hidden="true">IT</span>
             <span>InvenTrack</span>
           </div>
-          <p className="eyebrow login-eyebrow">SELAMAT DATANG KEMBALI</p>
-          <h2 id="login-title">Masuk ke akun Anda</h2>
-          <p className="login-intro">Gunakan akun InvenTrack untuk melanjutkan.</p>
+          <p className="eyebrow login-eyebrow">
+            {isRegistering ? 'BUAT AKUN INVENTRACK' : 'SELAMAT DATANG KEMBALI'}
+          </p>
+          <h2 id="login-title">{isRegistering ? 'Registrasi akun' : 'Masuk ke akun Anda'}</h2>
+          <p className="login-intro">
+            {isRegistering
+              ? 'Daftarkan akun untuk mulai menggunakan InvenTrack.'
+              : 'Gunakan akun InvenTrack untuk melanjutkan.'}
+          </p>
 
           <form className="login-form" onSubmit={handleSubmit}>
+            {isRegistering && (
+              <>
+                <label htmlFor="name">Nama</label>
+                <input
+                  autoComplete="name"
+                  id="name"
+                  name="name"
+                  onChange={(event) => setName(event.target.value)}
+                  placeholder="Nama lengkap"
+                  required
+                  value={name}
+                />
+              </>
+            )}
+
             <label htmlFor="email">Email</label>
             <input
-              autoComplete="username"
+              autoComplete={isRegistering ? 'email' : 'username'}
               id="email"
               name="email"
               onChange={(event) => setEmail(event.target.value)}
@@ -102,7 +135,7 @@ function LoginPage({ onAuthenticated }: LoginPageProps) {
               </button>
             </div>
             <input
-              autoComplete="current-password"
+              autoComplete={isRegistering ? 'new-password' : 'current-password'}
               id="password"
               name="password"
               onChange={(event) => setPassword(event.target.value)}
@@ -112,15 +145,33 @@ function LoginPage({ onAuthenticated }: LoginPageProps) {
               value={password}
             />
 
+            {successMessage && <p className="form-success" role="status">{successMessage}</p>}
             {errorMessage && <p className="form-error" role="alert">{errorMessage}</p>}
 
             <button className="submit-button" disabled={isSubmitting} type="submit">
-              <span>{isSubmitting ? 'Memeriksa akun...' : 'Masuk'}</span>
+              <span>
+                {isSubmitting
+                  ? isRegistering ? 'Membuat akun...' : 'Memeriksa akun...'
+                  : isRegistering ? 'Buat akun' : 'Masuk'}
+              </span>
               <span aria-hidden="true">&#8594;</span>
             </button>
           </form>
 
-          <p className="login-note">Akses hanya untuk pengguna yang terdaftar.</p>
+          <p className="login-note">
+            {isRegistering ? 'Sudah punya akun?' : 'Belum punya akun?'}{' '}
+            <button
+              className="auth-switch-button"
+              onClick={() => {
+                setIsRegistering((registering) => !registering)
+                setErrorMessage('')
+                setSuccessMessage('')
+              }}
+              type="button"
+            >
+              {isRegistering ? 'Masuk' : 'Registrasi'}
+            </button>
+          </p>
         </div>
         <p className="login-footer">INVENTRACK · INTERNAL SYSTEM</p>
       </section>
