@@ -242,7 +242,10 @@
 }
 
 .password-toggle:hover { color: #a55c43; }
-.form-error { margin: 12px 0 0; color: #a33832; font-size: 12px; line-height: 1.5; }
+.form-error,
+.form-success { margin: 12px 0 0; font-size: 12px; line-height: 1.5; }
+.form-error { color: #a33832; }
+.form-success { color: #2f704c; }
 
 .submit-button {
   display: flex;
@@ -264,6 +267,8 @@
 .submit-button:disabled { cursor: wait; opacity: 0.72; }
 .submit-button span:last-child { color: #f3a47e; font-size: 20px; }
 .login-note { margin: 19px 0 0; color: #87918a; font-size: 11px; text-align: center; }
+.auth-switch-button { padding: 2px 0; border: 0; background: transparent; color: #39705c; font-size: inherit; font-weight: 700; }
+.auth-switch-button:hover { color: #a55c43; }
 .login-footer { margin-top: auto; padding-top: 32px; color: #929e96; text-align: center; }
 
 .session-page { display: flex; min-height: 100vh; flex-direction: column; padding: 38px clamp(24px, 7vw, 100px) 26px; background: #f5f6f1; }
