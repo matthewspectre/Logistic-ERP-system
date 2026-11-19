@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import LoginPage from './features/auth/login/LoginPage'
+import DashboardPage from './features/dashboard/DashboardPage'
 import { clearSession, readSession, saveSession } from './features/auth/session'
 import type { AuthSession } from './features/auth/types'
 import './App.css'
@@ -21,33 +22,7 @@ function App() {
     return <LoginPage onAuthenticated={handleAuthenticated} />
   }
 
-  return (
-    <main className="session-page">
-      <a className="wordmark" href="/" aria-label="InvenTrack">
-        <span className="wordmark-symbol" aria-hidden="true">IT</span>
-        <span>InvenTrack</span>
-      </a>
-      <section className="session-content" aria-labelledby="session-title">
-        <p className="eyebrow">AKSES TERVERIFIKASI</p>
-        <h1 id="session-title">Selamat datang, {session.user.name}</h1>
-        <p className="session-copy">Anda berhasil masuk ke sistem InvenTrack.</p>
-        <dl className="session-details">
-          <div>
-            <dt>Email</dt>
-            <dd>{session.user.email}</dd>
-          </div>
-          <div>
-            <dt>Role</dt>
-            <dd>{session.user.role}</dd>
-          </div>
-        </dl>
-        <button className="logout-button" type="button" onClick={handleLogout}>
-          Keluar dari akun
-        </button>
-      </section>
-      <p className="session-footer">INVENTORY · PROCUREMENT · OPERATIONS</p>
-    </main>
-  )
+  return <DashboardPage session={session} onLogout={handleLogout} />
 }
 
 export default App

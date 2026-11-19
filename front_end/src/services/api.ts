@@ -6,6 +6,16 @@ export async function apiRequest<T>(path: string, init: RequestInit = {}): Promi
   const headers = new Headers(init.headers)
   headers.set('Accept', 'application/json')
 
+  try {
+    const storedSession = sessionStorage.getItem('evindo.auth.session')
+    if (storedSession) {
+      const session = JSON.parse(storedSession) as { token?: string }
+      if (session.token) headers.set('Authorization', `Bearer ${session.token}`)
+    }
+  } catch {
+    // Request tetap berjalan; backend akan menolak jika autentikasi tidak tersedia.
+  }
+
   if (init.body && !headers.has('Content-Type')) {
     headers.set('Content-Type', 'application/json')
   }
