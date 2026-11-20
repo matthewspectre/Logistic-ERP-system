@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { AuthSession } from '../auth/types'
+import SuppliersPage from '../suppliers/SuppliersPage'
 import { fetchDashboardData } from './dashboard-service'
 
 interface DashboardPageProps {
@@ -18,10 +19,11 @@ interface DashboardData {
 const navigation = [
   { label: 'Ringkasan', key: 'summary', icon: '01' },
   { label: 'Produk', key: 'products', icon: '02' },
-  { label: 'Inventori', key: 'inventory', icon: '03' },
-  { label: 'Permintaan', key: 'requests', icon: '04' },
-  { label: 'Pesanan', key: 'orders', icon: '05' },
-  { label: 'Penerimaan', key: 'receipts', icon: '06' },
+  { label: 'Supplier', key: 'suppliers', icon: '03' },
+  { label: 'Inventori', key: 'inventory', icon: '04' },
+  { label: 'Permintaan', key: 'requests', icon: '05' },
+  { label: 'Pesanan', key: 'orders', icon: '06' },
+  { label: 'Penerimaan', key: 'receipts', icon: '07' },
 ]
 
 const statusClass: Record<string, string> = {
@@ -149,7 +151,7 @@ function DashboardPage({ session, onLogout }: DashboardPageProps) {
         </header>
 
         <div className="dashboard-content">
-          {loading ? (
+          {activeNav === 'suppliers' ? <SuppliersPage /> : loading ? (
             <div className="loading-grid" aria-label="Memuat ringkasan">
               {[1, 2, 3, 4].map((item) => <div className="loading-card" key={item} />)}
             </div>
