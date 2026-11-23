@@ -487,6 +487,7 @@ td strong { color: #315347; }
 .stock-row strong { color: #315347; font-size: 11px; }
 .stock-row span { color: #98a29c; font-size: 9px; }
 .stock-row b { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 50%; background: #f3e8dc; color: #9a7044; font-size: 11px; }
+.stock-panel-count { color: #9a7044; font-size: 9px; font-weight: 700; }
 .stock-empty { display: grid; min-height: 150px; place-content: center; text-align: center; }
 .stock-empty strong { color: #315347; font-size: 12px; }
 .stock-empty span { margin-top: 5px; color: #98a29c; font-size: 10px; }

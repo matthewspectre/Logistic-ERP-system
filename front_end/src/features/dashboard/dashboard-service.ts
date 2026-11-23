@@ -52,10 +52,10 @@ export interface InventoryMovementItem {
 
 export async function fetchDashboardData() {
   const [inventory, requests, orders, receipts, movements] = await Promise.allSettled([
-    apiRequest<ListResponse<InventoryItem>>('/inventories'),
-    apiRequest<ListResponse<PurchaseRequestItem>>('/purchase-requests'),
-    apiRequest<ListResponse<PurchaseOrderItem>>('/purchase-orders'),
-    apiRequest<ListResponse<GoodsReceiptItem>>('/goods-receipts'),
+    apiRequest<ListResponse<InventoryItem>>('/inventories/'),
+    apiRequest<ListResponse<PurchaseRequestItem>>('/purchase-requests/'),
+    apiRequest<ListResponse<PurchaseOrderItem>>('/purchase-orders/'),
+    apiRequest<ListResponse<GoodsReceiptItem>>('/goods-receipts/'),
     apiRequest<ListResponse<InventoryMovementItem>>('/inventory-movements'),
   ])
 

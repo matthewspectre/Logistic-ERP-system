@@ -72,7 +72,10 @@ function DashboardPage({ session, onLogout }: DashboardPageProps) {
   const requestCount = data?.requests.data.length ?? 0
   const orderCount = data?.orders.data.length ?? 0
   const receiptCount = data?.receipts.data.length ?? 0
-  const lowStockCount = data?.inventory.data.filter((item) => item.stock <= 10).length ?? 0
+  const lowStockItems = (data?.inventory.data ?? [])
+    .filter((item) => item.stock <= 10)
+    .sort((first, second) => first.stock - second.stock)
+  const lowStockCount = lowStockItems.length
 
   const recentRequests = data?.requests.data.slice(0, 5) ?? []
   const recentOrders = data?.orders.data.slice(0, 5) ?? []
@@ -216,13 +219,14 @@ function DashboardPage({ session, onLogout }: DashboardPageProps) {
                 <article className="panel stock-panel">
                   <div className="panel-heading">
                     <div><p>PERHATIAN</p><h2>Stok rendah</h2></div>
+                    {lowStockCount > 0 && <span className="stock-panel-count">{lowStockCount} item</span>}
                   </div>
                   <div className="stock-list">
-                    {(data?.inventory.data.filter((item) => item.stock <= 10).slice(0, 5) ?? []).length ?
-                      data?.inventory.data.filter((item) => item.stock <= 10).slice(0, 5).map((item) => (
-                        <div className="stock-row" key={`${item.product_name}-${item.warehouse_name}`}>
+                    {lowStockItems.length ?
+                      lowStockItems.slice(0, 5).map((item) => (
+                        <div className="stock-row" key={`${item.product_name}-${item.warehouse_name}-${item.stock}`}>
                           <div><strong>{item.product_name}</strong><span>{item.warehouse_name}</span></div>
-                          <b>{item.stock}</b>
+                          <b title="Jumlah stok">{item.stock}</b>
                         </div>
                       )) : (
                         <div className="stock-empty">
