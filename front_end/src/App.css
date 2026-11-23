@@ -625,6 +625,13 @@ td strong { color: #315347; }
 .supplier-form textarea:focus { border-color: #34715d; box-shadow: 0 0 0 2px rgb(52 113 93 / 10%); }
 .supplier-form-wide { grid-column: 1 / -1; }
 .supplier-form-actions { display: flex; justify-content: end; gap: 8px; margin-top: 3px; }
+
+.products-page { min-width: 0; }
+.product-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 420px; }
+.products-table { min-width: 580px; }
+.products-table th:nth-child(1) { width: 42%; }
+.products-table th:nth-child(2) { width: 18%; }
+.products-table th:nth-child(3) { width: 20%; }
 .supplier-secondary-button { min-height: 38px; padding: 0 13px; border: 1px solid #d5ddd4; border-radius: 3px; background: transparent; color: #52665b; font-size: 10px; font-weight: 700; }
 .supplier-secondary-button:hover { background: #edf1eb; }
 

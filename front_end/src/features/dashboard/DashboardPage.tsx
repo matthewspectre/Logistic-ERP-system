@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { AuthSession } from '../auth/types'
+import ProductsPage from '../products/ProductsPage'
 import SuppliersPage from '../suppliers/SuppliersPage'
 import { fetchDashboardData } from './dashboard-service'
 
@@ -151,7 +152,7 @@ function DashboardPage({ session, onLogout }: DashboardPageProps) {
         </header>
 
         <div className="dashboard-content">
-          {activeNav === 'suppliers' ? <SuppliersPage /> : loading ? (
+          {activeNav === 'suppliers' ? <SuppliersPage /> : activeNav === 'products' ? <ProductsPage /> : loading ? (
             <div className="loading-grid" aria-label="Memuat ringkasan">
               {[1, 2, 3, 4].map((item) => <div className="loading-card" key={item} />)}
             </div>
